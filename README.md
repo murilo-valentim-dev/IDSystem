@@ -30,6 +30,7 @@ Separação de responsabilidades entre **Views**, **ViewModels** e **Models**, m
 
 ## 🏗️ Estrutura do Projeto
 
+```text 
 IDSystem/
 ├── App.xaml # Ponto de entrada + ResourceDictionary global
 ├── MainWindow.xaml/.cs # Janela principal
@@ -39,7 +40,7 @@ IDSystem/
 ├── Models/ # Classes de modelo de dados (ex: Pessoa.cs)
 ├── ViewModels/ # Classes ViewModel correspondentes às Views
 └── Services/ # Serviços para acesso a dados, etc.
-
+``` 
 
 ## 🚀 Como Executar o Projeto
 
