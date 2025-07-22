@@ -1,0 +1,685 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--#region padrão -->
+
+    <SolidColorBrush x:Key="DefaultBorder"          Color="#FFACACAC" />
+    <SolidColorBrush x:Key="DefaultBorderOld"       Color="#FFACACAC" />
+    <SolidColorBrush x:Key="DefaultBorderOff"       Color="#FFD9D9D9" />
+    <SolidColorBrush x:Key="DefaultBorderBox"       Color="#FFD8D8D8" />
+    <SolidColorBrush x:Key="DefaultForeground"      Color="#FF444444" />
+    <SolidColorBrush x:Key="DefaultForegroundOff"   Color="#FF666666" />
+    <SolidColorBrush x:Key="DefaultBackground"      Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="DefaultBackgroundOff"   Color="#FFEEEEEE" />
+    <SolidColorBrush x:Key="DefaultBackgroundBox"   Color="#FFF7F7F7" />
+    <SolidColorBrush x:Key="ConfigBackground"       Color="#FFFFFFCC" />
+
+    <SolidColorBrush x:Key="MotivoFontFore"         Color="#FFFF6347" />
+
+    <!--#endregion -->
+
+    <Style x:Key="icon.eye" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 38,33.1538C 40.6765,33.1538 42.8462,35.3235 42.8462,38C 42.8462,40.6765 40.6765,42.8461 38,42.8461C 35.3235,42.8461 33.1539,40.6765 33.1539,38C 33.1539,35.3235 35.3236,33.1538 38,33.1538 Z M 38,25.0769C 49.3077,25.0769 59,33.1538 59,38C 59,42.8461 49.3077,50.9231 38,50.9231C 26.6923,50.9231 17,42.8461 17,38C 17,33.1538 26.6923,25.0769 38,25.0769 Z M 38,29.1154C 33.0932,29.1154 29.1154,33.0932 29.1154,38C 29.1154,42.9068 33.0932,46.8846 38,46.8846C 42.9068,46.8846 46.8846,42.9068 46.8846,38C 46.8846,33.0932 42.9068,29.1154 38,29.1154 Z " />
+    </Style>
+
+
+    <Style x:Key="WrapPanelCommand" TargetType="{x:Type WrapPanel}">
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="FlowDirection" Value="RightToLeft"/>
+    </Style>
+    <Style x:Key="CommandButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="8,5,0,5" />
+        <Setter Property="IsEnabled" Value="True" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid">
+                        <Border x:Name="border" CornerRadius="4"
+                                Background="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+                            <Grid Width="Auto" Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0">
+                                    <TextBlock x:Name="texto" FontSize="13" LineHeight="12"
+                                           Text="{Binding Content, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" 
+                                           LineStackingStrategy="BlockLineHeight" FontWeight="DemiBold" TextWrapping="Wrap"
+                                           Foreground="Black" Margin="12,2,8,0" TextAlignment="Center"
+                                           Width="Auto" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="1" BorderThickness="1,0,0,0" CornerRadius="0,4,4,0" Background="Gray"
+                                        BorderBrush="Black">
+                                    <TextBlock x:Name="funcao" Text="{Binding CommandParameter, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" 
+                                               Foreground="Black" FontSize="18" LineHeight="18" 
+                                               VerticalAlignment="Center"
+                                               LineStackingStrategy="BlockLineHeight" Padding="6,1,6,0" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand" TargetName="border"/>
+                            <!--<Setter TargetName="border" Property="Background" Value="{DynamicResource ValidSecondary}"></Setter>
+                            <Setter TargetName="path" Property="Fill" Value="{DynamicResource ValidLight}"></Setter>
+                            <Setter TargetName="texto" Property="Foreground" Value="{DynamicResource ValidLight}"></Setter>
+                            <Setter TargetName="separador" Property="BorderBrush" Value="{DynamicResource ValidLight}"></Setter>
+                            <Setter TargetName="funcao" Property="Foreground" Value="{DynamicResource ValidLight}"></Setter>-->
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonPage" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="Foreground" Value="#222" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="8,5,0,5" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Cursor" Value="Arrow" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="6"
+                        SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                   Text="{TemplateBinding CommandParameter}"
+                                   FontSize="16"
+                                   Foreground="#666"
+                                   VerticalAlignment="Center"
+                                   Margin="8,0"/>
+
+                            <ContentPresenter Grid.Column="1"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Margin="8,0"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#EEE" />
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#DDD"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#CCC"/>
+                            <Setter TargetName="border" Property="Opacity" Value="0.6"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+    <Style x:Key="IconButton" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="Foreground" Value="{DynamicResource ValidSecondary}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid">
+                        <Border x:Name="border" CornerRadius="4"
+                                Background="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}"
+                                BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}"
+                                BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}"
+                                Padding="{Binding Padding, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
+                            <Path x:Name="path" Margin="4"
+                                  Style="{Binding Tag, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Stretch="Uniform" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.7"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand" TargetName="border"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DatePickerID" TargetType="{x:Type DatePicker}">
+        <Setter Property="IsTodayHighlighted" Value="True"/>
+        <Setter Property="SelectedDateFormat" Value="Short"/>
+        <Setter Property="Height" Value="30" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="DemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="4,2,2,0"/>
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DefaultBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="CalendarStyle" Value="{DynamicResource CalendarStyle1}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DatePicker}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <Grid x:Name="PART_Root" Background="Transparent"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid.Resources>
+                                <SolidColorBrush x:Key="DisabledBrush" Color="#A5FFFFFF"/>
+                                <ControlTemplate x:Key="DropDownButtonTemplate" TargetType="{x:Type Button}">
+                                    <Border Background="Transparent" Cursor="Hand" Margin="0,3,2,0" >
+                                        <Path x:Name="PART_Calendario" Style="{DynamicResource icon.calendar}"
+                                              Fill="{DynamicResource DefaultForeground}" HorizontalAlignment="Center" 
+                                              Stretch="Uniform" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Fill" TargetName="PART_Calendario" Value="{DynamicResource DefaultForegroundOff}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="PART_Button" Grid.Column="1" Foreground="{TemplateBinding Foreground}" 
+                                    HorizontalAlignment="Right" Margin="3,0,3,0" 
+                                    Grid.Row="0" Background="Transparent"
+                                    Template="{DynamicResource DropDownButtonTemplate}"
+                                    VerticalAlignment="Top" Width="20" />
+
+                            <DatePickerTextBox x:Name="PART_TextBox" Grid.Column="0" Background="Transparent"
+                                               Focusable="{TemplateBinding Focusable}" 
+                                               HorizontalContentAlignment="Stretch" Margin="0,1,0,0"
+                                               Grid.Row="0" VerticalContentAlignment="Stretch"/>
+
+                            <Grid x:Name="PART_DisabledVisual" Grid.ColumnSpan="2" Grid.Column="0" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Grid.Column="0" Fill="#A5FFFFFF" RadiusY="1" Grid.Row="0" RadiusX="1"/>
+                                <Rectangle Grid.Column="1" Fill="#A5FFFFFF" Height="18" Margin="3,0,3,0" RadiusY="1" Grid.Row="0" RadiusX="1" Width="19"/>
+                                <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
+                            <Setter Property="Foreground" TargetName="PART_TextBox" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </DataTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" Value="{DynamicResource DefaultBackgroundOff}"/>
+                            <Setter Property="Foreground" TargetName="PART_TextBox" Value="{DynamicResource DefaultForegroundOff}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource DefaultBorder}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SecondColor}"/>
+        <!--<EventSetter Event="PreviewMouseUp" Handler="Calendar_PreviewMouseUp" />-->
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Calendar}">
+                    <Viewbox Height="240" x:Name="PART_Root" HorizontalAlignment="Center">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="4" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" Margin="0">
+
+                            <CalendarItem x:Name="PART_CalendarItem" BorderBrush="Transparent" Padding="0" Margin="0"
+                                          BorderThickness="0" Background="Transparent" 
+                                          Style="{DynamicResource IDCalendarItemStyle}"/>
+                        </Border>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="IDCalendarItemStyle" TargetType="{x:Type CalendarItem}">
+        <Setter Property="Margin" Value="0,3,0,3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CalendarItem}">
+                    <ControlTemplate.Resources>
+                        <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
+                            <TextBlock Foreground="{DynamicResource DefaultForeground}" FontWeight="DemiBold" FontSize="9.5" FontFamily="Segoe UI"
+                                       Margin="0,6,0,6" Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="PART_Root">
+                        <Grid.Resources>
+                            <SolidColorBrush x:Key="DisabledColor" Color="#A5FFFFFF" />
+                        </Grid.Resources>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_DisabledVisual" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" CornerRadius="0" Margin="-1">
+                            <Grid>
+                                <Grid.Resources>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Border Background="{DynamicResource SecondColor}" CornerRadius="4,4,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"></Border>
+                                <Button x:Name="PART_PreviousButton" Template="{DynamicResource PreviousButtonTemplate}"
+                                            Focusable="False" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Height="20" Width="28" />
+                                <Button x:Name="PART_HeaderButton" FontWeight="DemiBold" Focusable="False" FontSize="10.5"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0"
+                                            Template="{DynamicResource HeaderButtonTemplate}" />
+                                <Button x:Name="PART_NextButton" Focusable="False" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="0"
+                                            Template="{DynamicResource NextButtonTemplate}" Height="20" Width="28" />
+                                <Grid x:Name="PART_MonthView" Visibility="Visible" Grid.ColumnSpan="3" Grid.Row="1" Margin="6,-1,6,6" HorizontalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                                <Grid x:Name="PART_YearView" Visibility="Hidden" Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Center" Margin="6,3,7,3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Rectangle x:Name="PART_DisabledVisual" Fill="{DynamicResource DisabledColor}" Opacity="0" RadiusY="2" RadiusX="2" Stretch="Fill"
+                                   Stroke="{DynamicResource DisabledColor}" StrokeThickness="1" Visibility="Collapsed" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Visibility" TargetName="PART_DisabledVisual" Value="Visible" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}" Value="Year">
+                            <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden" />
+                            <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}" Value="Decade">
+                            <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden" />
+                            <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="HeaderButtonTemplate" TargetType="{x:Type Button}">
+        <Grid Cursor="Hand">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0" To=".8" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="buttonContent" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <ContentPresenter x:Name="buttonContent" Margin="1,4,1,6" ContentTemplate="{TemplateBinding ContentTemplate}" 
+                              Content="{TemplateBinding Content}" TextElement.Foreground="{DynamicResource Fonte2Color}" 
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="NextButtonTemplate"
+                 TargetType="{x:Type Button}">
+        <Grid Cursor="Hand">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                             To=".5"
+                             Storyboard.TargetProperty="(Shape.Fill).(Brush.Opacity)"
+                             Storyboard.TargetName="path" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid Background="Transparent">
+                <Path x:Name="path" Margin="0,3,14,0" Stretch="Uniform" HorizontalAlignment="Left" Height="12"
+                      VerticalAlignment="Center" Style="{DynamicResource icon.chevron.right}" Fill="{DynamicResource Fonte2Color}" />
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="PreviousButtonTemplate"
+                 TargetType="{x:Type Button}">
+        <Grid Cursor="Hand">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                             To=".5"
+                             Storyboard.TargetProperty="(Shape.Fill).(Brush.Opacity)"
+                             Storyboard.TargetName="path" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid Background="Transparent">
+                <Path x:Name="path" Margin="14,3,0,0" Stretch="Uniform" HorizontalAlignment="Left" Height="12"
+                      VerticalAlignment="Center" Style="{DynamicResource icon.chevron.left}" Fill="{DynamicResource Fonte2Color}" />
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+
+
+
+    <!--#region cores -->
+
+    <SolidColorBrush x:Key="BackWindow"     Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="GridBackColor"  Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="GridFormColor"  Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="ValidColor"     Color="#FF0097C1" />
+
+    <SolidColorBrush x:Key="PrimarColor"    Color="#FF313556" />
+    <SolidColorBrush x:Key="Fonte1Color"    Color="#FFF0F1F2" />
+
+    <SolidColorBrush x:Key="SecondColor"    Color="#FF6C757D" />
+    <SolidColorBrush x:Key="Fonte2Color"    Color="#FFF0F1F2" />
+
+    <SolidColorBrush x:Key="ValidBlue"      Color="#FF007BFF" />
+    <SolidColorBrush x:Key="ValidIndigo"    Color="#FF6610F2" />
+    <SolidColorBrush x:Key="ValidPurple"    Color="#FF6F42C1" />
+    <SolidColorBrush x:Key="ValidPink"      Color="#FFE83E8C" />
+    <SolidColorBrush x:Key="ValidRed"       Color="#FFDC3545" />
+    <SolidColorBrush x:Key="ValidOrange"    Color="#FFFD7E14" />
+    <SolidColorBrush x:Key="ValidYellow"    Color="#FFFFC107" />
+    <SolidColorBrush x:Key="ValidGreen"     Color="#FF28A745" />
+    <SolidColorBrush x:Key="ValidTeal"      Color="#FF20C997" />
+    <SolidColorBrush x:Key="ValidCyan"      Color="#FF17A2B8" />
+    <SolidColorBrush x:Key="ValidWhite"     Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ValidGray"      Color="#FF6C757D" />
+    <SolidColorBrush x:Key="ValidGrayDark"  Color="#FF343A40" />
+    <SolidColorBrush x:Key="ValidPrimary"   Color="#FF0D6EFD" />
+    <SolidColorBrush x:Key="ValidSecondary" Color="#FF6C757D" />
+    <SolidColorBrush x:Key="ValidSuccess"   Color="#FF198754" />
+    <SolidColorBrush x:Key="ValidInfo"      Color="#FF17A2B8" />
+    <SolidColorBrush x:Key="ValidWarning"   Color="#FFFFC107" />
+    <SolidColorBrush x:Key="ValidDanger"    Color="#FFDC3545" />
+    <SolidColorBrush x:Key="ValidLight"     Color="#FFF0F1F2" />
+    <SolidColorBrush x:Key="ValidDark"      Color="#FF212529" />
+
+    <SolidColorBrush x:Key="AlertForePrimary"   Color="#FF084298" />
+    <SolidColorBrush x:Key="AlertForeSecondary" Color="#FF41464B" />
+    <SolidColorBrush x:Key="AlertForeSuccess"   Color="#FF0F5132" />
+    <SolidColorBrush x:Key="AlertForeInfo"      Color="#FF055160" />
+    <SolidColorBrush x:Key="AlertForeWarning"   Color="#FF664D03" />
+    <SolidColorBrush x:Key="AlertForeDanger"    Color="#FF842029" />
+    <SolidColorBrush x:Key="AlertForeLight"     Color="#FF636464" />
+    <SolidColorBrush x:Key="AlertForeDark"      Color="#FF141619" />
+
+    <SolidColorBrush x:Key="AlertBordPrimary"   Color="#88084298" />
+    <SolidColorBrush x:Key="AlertBordSecondary" Color="#8841464B" />
+    <SolidColorBrush x:Key="AlertBordSuccess"   Color="#880F5132" />
+    <SolidColorBrush x:Key="AlertBordInfo"      Color="#88055160" />
+    <SolidColorBrush x:Key="AlertBordWarning"   Color="#88664D03" />
+    <SolidColorBrush x:Key="AlertBordDanger"    Color="#88842029" />
+    <SolidColorBrush x:Key="AlertBordLight"     Color="#88636464" />
+    <SolidColorBrush x:Key="AlertBordDark"      Color="#88141619" />
+
+    <SolidColorBrush x:Key="AlertBackPrimary"   Color="#FFB6D4FE" />
+    <SolidColorBrush x:Key="AlertBackSecondary" Color="#FFD3D6D8" />
+    <SolidColorBrush x:Key="AlertBackSuccess"   Color="#FFBADBCC" />
+    <SolidColorBrush x:Key="AlertBackInfo"      Color="#FFB6EFFB" />
+    <SolidColorBrush x:Key="AlertBackWarning"   Color="#FFFFECB5" />
+    <SolidColorBrush x:Key="AlertBackDanger"    Color="#FFF5C2C7" />
+    <SolidColorBrush x:Key="AlertBackLight"     Color="#FFFDFDFE" />
+    <SolidColorBrush x:Key="AlertBackDark"      Color="#FFBCBEBF" />
+
+    <SolidColorBrush x:Key="LightSalmon" Color="#FFFFA07A" />
+    <SolidColorBrush x:Key="Salmon" Color="#FFFA8072" />
+    <SolidColorBrush x:Key="DarkSalmon" Color="#FFE9967A" />
+    <SolidColorBrush x:Key="LightCoral" Color="#FFF08080" />
+    <SolidColorBrush x:Key="IndianRed" Color="#FFCD5C5C" />
+    <SolidColorBrush x:Key="Crimson" Color="#FFDC143C" />
+    <SolidColorBrush x:Key="Firebrick" Color="#FFB22222" />
+    <SolidColorBrush x:Key="Red" Color="#FFFF0000" />
+    <SolidColorBrush x:Key="DarkRed" Color="#FF8B0000" />
+    <SolidColorBrush x:Key="Coral" Color="#FFFF7F50" />
+    <SolidColorBrush x:Key="Tomato" Color="#FFFF6347" />
+    <SolidColorBrush x:Key="OrangeRed" Color="#FFFF4500" />
+    <SolidColorBrush x:Key="Gold" Color="#FFFFD700" />
+    <SolidColorBrush x:Key="Orange" Color="#FFFFA500" />
+    <SolidColorBrush x:Key="DarkOrange" Color="#FFFF8C00" />
+    <SolidColorBrush x:Key="LightYellow" Color="#FFFFFFE0" />
+    <SolidColorBrush x:Key="LemonChiffon" Color="#FFFFFACD" />
+    <SolidColorBrush x:Key="LightGoldenrodYellow" Color="#FFFAFAD2" />
+    <SolidColorBrush x:Key="PapayaWhip" Color="#FFFFEFD5" />
+    <SolidColorBrush x:Key="Moccasin" Color="#FFFFE4B5" />
+    <SolidColorBrush x:Key="PeachPuff" Color="#FFFFDAB9" />
+    <SolidColorBrush x:Key="PaleGoldenrod" Color="#FFEEE8AA" />
+    <SolidColorBrush x:Key="Khaki" Color="#FFF0E68C" />
+    <SolidColorBrush x:Key="Darkkhaki" Color="#FFBDB76B" />
+    <SolidColorBrush x:Key="Yellow" Color="#FFFFFF00" />
+    <SolidColorBrush x:Key="LawnGreen" Color="#FF7CFC00" />
+    <SolidColorBrush x:Key="Chartreuse" Color="#FF7FFF00" />
+    <SolidColorBrush x:Key="LimeGreen" Color="#FF32CD32" />
+    <SolidColorBrush x:Key="Lime" Color="#FF00FF00" />
+    <SolidColorBrush x:Key="ForestGreen" Color="#FF228B22" />
+    <SolidColorBrush x:Key="Green" Color="#FF008000" />
+    <SolidColorBrush x:Key="DarkGreen" Color="#FF006400" />
+    <SolidColorBrush x:Key="GreenYellow" Color="#FFADFF2F" />
+    <SolidColorBrush x:Key="YellowGreen" Color="#FF9ACD32" />
+    <SolidColorBrush x:Key="SpringGreen" Color="#FF00FF7F" />
+    <SolidColorBrush x:Key="MediumSpringGreen" Color="#FF00FA9A" />
+    <SolidColorBrush x:Key="LightGreen" Color="#FF90EE90" />
+    <SolidColorBrush x:Key="PaleGreen" Color="#FF98FB98" />
+    <SolidColorBrush x:Key="DarkSeaGreen" Color="#FF8FBC8F" />
+    <SolidColorBrush x:Key="MediumSeaGreen" Color="#FF3CB371" />
+    <SolidColorBrush x:Key="SeaGreen" Color="#FF2E8B57" />
+    <SolidColorBrush x:Key="Olive" Color="#FF808000" />
+    <SolidColorBrush x:Key="DarkOliveGreen" Color="#FF556B2F" />
+    <SolidColorBrush x:Key="OliveDrab" Color="#FF6B8E23" />
+    <SolidColorBrush x:Key="LightCyan" Color="#FFE0FFFF" />
+    <SolidColorBrush x:Key="Cyan" Color="#FF00FFFF" />
+    <SolidColorBrush x:Key="Aqua" Color="#FF00FFFF" />
+    <SolidColorBrush x:Key="AquaMarine" Color="#FF7FFFD4" />
+    <SolidColorBrush x:Key="MediumAquaMarine" Color="#FF66CDAA" />
+    <SolidColorBrush x:Key="PaleTurquoise" Color="#FFAFEEEE" />
+    <SolidColorBrush x:Key="Turquoise" Color="#FF40E0D0" />
+    <SolidColorBrush x:Key="MediumTurquoise" Color="#FF48D1CC" />
+    <SolidColorBrush x:Key="DarkTurquoise" Color="#FF00CED1" />
+    <SolidColorBrush x:Key="LightSeaGreen" Color="#FF20B2AA" />
+    <SolidColorBrush x:Key="CadetBlue" Color="#FF5F9EA0" />
+    <SolidColorBrush x:Key="DarkCyan" Color="#FF008B8B" />
+    <SolidColorBrush x:Key="Teal" Color="#FF008080" />
+    <SolidColorBrush x:Key="PowderBlue" Color="#FFB0E0E6" />
+    <SolidColorBrush x:Key="LightBlue" Color="#FFADD8E6" />
+    <SolidColorBrush x:Key="LightSkyBlue" Color="#FF87CEFA" />
+    <SolidColorBrush x:Key="SkyBlue" Color="#FF87CEEB" />
+    <SolidColorBrush x:Key="DeepSkyBlue" Color="#FF00BFFF" />
+    <SolidColorBrush x:Key="LightSteelBlue" Color="#FFB0C4DE" />
+    <SolidColorBrush x:Key="DodgerBlue" Color="#FF1E90FF" />
+    <SolidColorBrush x:Key="CornflowerBlue" Color="#FF6495ED" />
+    <SolidColorBrush x:Key="SteelBlue" Color="#FF4682B4" />
+    <SolidColorBrush x:Key="RoyalBlue" Color="#FF4169E1" />
+    <SolidColorBrush x:Key="Blue" Color="#FF0000FF" />
+    <SolidColorBrush x:Key="MediumBlue" Color="#FF0000CD" />
+    <SolidColorBrush x:Key="DarkBlue" Color="#FF00008B" />
+    <SolidColorBrush x:Key="Navy" Color="#FF000080" />
+    <SolidColorBrush x:Key="MidnightBlue" Color="#FF191970" />
+    <SolidColorBrush x:Key="MediumSlateBlue" Color="#FF7B68EE" />
+    <SolidColorBrush x:Key="SlateBlue" Color="#FF6A5ACD" />
+    <SolidColorBrush x:Key="DarkSlateBlue" Color="#FF483D8B" />
+    <SolidColorBrush x:Key="Lavender" Color="#FFE6E6FA" />
+    <SolidColorBrush x:Key="Thistle" Color="#FFD8BFD8" />
+    <SolidColorBrush x:Key="Plum" Color="#FFDDA0DD" />
+    <SolidColorBrush x:Key="Violet" Color="#FFEE82EE" />
+    <SolidColorBrush x:Key="Orchid" Color="#FFDA70D6" />
+    <SolidColorBrush x:Key="Fuchsia" Color="#FFFF00FF" />
+    <SolidColorBrush x:Key="Magenta" Color="#FFFF00FF" />
+    <SolidColorBrush x:Key="MediumOrchid" Color="#FFBA55D3" />
+    <SolidColorBrush x:Key="MediumPurple" Color="#FF9370DB" />
+    <SolidColorBrush x:Key="BlueViolet" Color="#FF8A2BE2" />
+    <SolidColorBrush x:Key="DarkViolet" Color="#FF9400D3" />
+    <SolidColorBrush x:Key="DarkOrchid" Color="#FF9932CC" />
+    <SolidColorBrush x:Key="DarkMagenta" Color="#FF8B008B" />
+    <SolidColorBrush x:Key="Purple" Color="#FF800080" />
+    <SolidColorBrush x:Key="Indigo" Color="#FF4B0082" />
+    <SolidColorBrush x:Key="Pink" Color="#FFFFC0CB" />
+    <SolidColorBrush x:Key="LightPink" Color="#FFFFB6C1" />
+    <SolidColorBrush x:Key="Hotpink" Color="#FFFF69B4" />
+    <SolidColorBrush x:Key="Deeppink" Color="#FFFF1493" />
+    <SolidColorBrush x:Key="PaleVioletRed" Color="#FFDB7093" />
+    <SolidColorBrush x:Key="MediumVioletRed" Color="#FFC71585" />
+    <SolidColorBrush x:Key="White" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="Snow" Color="#FFFFFAFA" />
+    <SolidColorBrush x:Key="Honeydew" Color="#FFF0FFF0" />
+    <SolidColorBrush x:Key="MintCream" Color="#FFF5FFFA" />
+    <SolidColorBrush x:Key="Azure" Color="#FFF0FFFF" />
+    <SolidColorBrush x:Key="AliceBlue" Color="#FFF0F8FF" />
+    <SolidColorBrush x:Key="GhostWhite" Color="#FFF8F8FF" />
+    <SolidColorBrush x:Key="WhiteSmoke" Color="#FFF5F5F5" />
+    <SolidColorBrush x:Key="Seashell" Color="#FFFFF5EE" />
+    <SolidColorBrush x:Key="Beige" Color="#FFF5F5DC" />
+    <SolidColorBrush x:Key="Oldlace" Color="#FFFDF5E6" />
+    <SolidColorBrush x:Key="FloralWhite" Color="#FFFFFAF0" />
+    <SolidColorBrush x:Key="Ivory" Color="#FFFFFFF0" />
+    <SolidColorBrush x:Key="AntiqueWhite" Color="#FFFAEBD7" />
+    <SolidColorBrush x:Key="Linen" Color="#FFFAF0E6" />
+    <SolidColorBrush x:Key="LavenderBlush" Color="#FFFFF0F5" />
+    <SolidColorBrush x:Key="Mistyrose" Color="#FFFFE4E1" />
+    <SolidColorBrush x:Key="Gainsboro" Color="#FFDCDCDC" />
+    <SolidColorBrush x:Key="LightGray" Color="#FFD3D3D3" />
+    <SolidColorBrush x:Key="Silver" Color="#FFC0C0C0" />
+    <SolidColorBrush x:Key="DarkGray" Color="#FFA9A9A9" />
+    <SolidColorBrush x:Key="Gray" Color="#FF808080" />
+    <SolidColorBrush x:Key="DimGray" Color="#FF696969" />
+    <SolidColorBrush x:Key="LightSlateGray" Color="#FF778899" />
+    <SolidColorBrush x:Key="SlateGray" Color="#FF708090" />
+    <SolidColorBrush x:Key="DarkSlateGray" Color="#FF2F4F4F" />
+    <SolidColorBrush x:Key="Black" Color="#FF000000" />
+    <SolidColorBrush x:Key="Cornsilk" Color="#FFFFF8DC" />
+    <SolidColorBrush x:Key="BlanchedAlmond" Color="#FFFFEBCD" />
+    <SolidColorBrush x:Key="Bisque" Color="#FFFFE4C4" />
+    <SolidColorBrush x:Key="NavajoWhite" Color="#FFFFDEAD" />
+    <SolidColorBrush x:Key="Wheat" Color="#FFF5DEB3" />
+    <SolidColorBrush x:Key="BurlyWood" Color="#FFDEB887" />
+    <SolidColorBrush x:Key="Tan" Color="#FFD2B48C" />
+    <SolidColorBrush x:Key="RosyBrown" Color="#FFBC8F8F" />
+    <SolidColorBrush x:Key="SandyBrown" Color="#FFF4A460" />
+    <SolidColorBrush x:Key="Goldenrod" Color="#FFDAA520" />
+    <SolidColorBrush x:Key="Peru" Color="#FFCD853F" />
+    <SolidColorBrush x:Key="Chocolate" Color="#FFD2691E" />
+    <SolidColorBrush x:Key="SaddleBrown" Color="#FF8B4513" />
+    <SolidColorBrush x:Key="Sienna" Color="#FFA0522D" />
+    <SolidColorBrush x:Key="Brown" Color="#FFA52A2A" />
+    <SolidColorBrush x:Key="Maroon" Color="#FF800000" />
+
+    <!--#endregion -->
+
+
+    <Style x:Key="icon.add" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " />
+    </Style>
+    <Style x:Key="icon.edit" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 42.7499,25.3335L 50.6666,33.2501L 31.6667,52.25L 23.75,44.3334L 42.7499,25.3335 Z M 52.1704,31.6664L 44.3333,23.8293L 47.6921,20.4706C 48.9288,19.2339 50.9338,19.2339 52.1705,20.4706L 55.5292,23.8293C 56.7659,25.066 56.7659,27.071 55.5292,28.3077L 52.1704,31.6664 Z M 21.7709,55.0207L 20.9792,54.2291L 23.0573,47.5988L 28.4011,52.9426L 21.7709,55.0207 Z " />
+    </Style>
+    <Style x:Key="icon.delete" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 25.3333,23.75L 50.6667,23.75C 51.5411,23.75 51.8541,27.3125 51.8541,27.3125L 24.1458,27.3125C 24.1458,27.3125 24.4589,23.75 25.3333,23.75 Z M 35.625,19.7917L 40.375,19.7917C 40.8122,19.7917 41.9583,20.9378 41.9583,21.375C 41.9583,21.8122 40.8122,22.9584 40.375,22.9584L 35.625,22.9584C 35.1878,22.9584 34.0416,21.8122 34.0416,21.375C 34.0416,20.9378 35.1878,19.7917 35.625,19.7917 Z M 27.7083,28.5L 48.2916,28.5C 49.1661,28.5 49.875,29.2089 49.875,30.0834L 48.2916,53.8334C 48.2916,54.7078 47.5828,55.4167 46.7083,55.4167L 29.2917,55.4167C 28.4172,55.4167 27.7083,54.7078 27.7083,53.8334L 26.125,30.0834C 26.125,29.2089 26.8339,28.5 27.7083,28.5 Z M 30.0833,31.6667L 30.4792,52.25L 33.25,52.25L 32.8542,31.6667L 30.0833,31.6667 Z M 36.4167,31.6667L 36.4167,52.25L 39.5833,52.25L 39.5833,31.6667L 36.4167,31.6667 Z M 43.1458,31.6667L 42.75,52.25L 45.5208,52.25L 45.9167,31.6667L 43.1458,31.6667 Z " />
+    </Style>
+    <Style x:Key="icon.calendar" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 18.0025,57.0081L 18.0025,23.0032L 23.0032,23.0032L 23.0032,20.0028C 23.0033,18.898 23.8988,18.0025 25.0035,18.0025L 29.004,18.0025C 30.1087,18.0025 31.0042,18.898 31.0043,20.0026L 31.0043,23.0032L 45.0063,23.0032L 45.0062,20.0026C 45.0062,18.8978 45.9018,18.0023 47.0065,18.0023L 51.0071,18.0023C 52.1118,18.0023 53.0074,18.8978 53.0074,20.0026L 53.0074,23.0032L 58.0081,23.0032L 58.0081,57.0081L 18.0025,57.0081 Z M 21.0029,54.0077L 55.0076,54.0077L 55.0076,31.0044L 21.0029,31.0044L 21.0029,54.0077 Z M 23.0032,47.0066L 29.004,47.0066L 29.004,52.0073L 23.0032,52.0073L 23.0032,47.0066 Z M 31.0043,47.0066L 37.0051,47.0066L 37.0051,52.0073L 31.0043,52.0073L 31.0043,47.0066 Z M 39.0054,47.0066L 45.0063,47.0066L 45.0063,52.0073L 39.0054,52.0073L 39.0054,47.0066 Z M 47.0065,47.0066L 53.0074,47.0066L 53.0074,52.0073L 47.0065,52.0073L 47.0065,47.0066 Z M 23.0032,40.0056L 29.004,40.0056L 29.004,45.0063L 23.0032,45.0063L 23.0032,40.0056 Z M 31.0043,40.0056L 37.0051,40.0056L 37.0051,45.0063L 31.0043,45.0063L 31.0043,40.0056 Z M 39.0054,40.0056L 45.0063,40.0056L 45.0063,45.0063L 39.0054,45.0063L 39.0054,40.0056 Z M 47.0065,40.0056L 53.0074,40.0056L 53.0074,45.0063L 47.0065,45.0063L 47.0065,40.0056 Z M 31.0043,33.0048L 37.0051,33.0048L 37.0051,38.0055L 31.0043,38.0055L 31.0043,33.0048 Z M 39.0054,33.0048L 45.0063,33.0048L 45.0063,38.0055L 39.0054,38.0055L 39.0054,33.0048 Z M 47.0065,33.0048L 53.0074,33.0048L 53.0074,38.0055L 47.0065,38.0055L 47.0065,33.0048 Z M 48.5067,20.0028C 47.6782,20.0028 47.0065,20.6745 47.0065,21.5031L 47.0065,24.5035C 47.0065,25.332 47.6782,26.0037 48.5067,26.0037L 49.5069,26.0037C 50.3354,26.0037 51.0071,25.332 51.0071,24.5035L 51.0071,21.5031C 51.0071,20.6745 50.3354,20.0028 49.5069,20.0028L 48.5067,20.0028 Z M 26.5037,20.0028C 25.6751,20.0028 25.0035,20.6745 25.0035,21.503L 25.0035,24.5034C 25.0035,25.332 25.6751,26.0037 26.5037,26.0037L 27.5038,26.0037C 28.3324,26.0037 29.004,25.332 29.004,24.5034L 29.004,21.503C 29.004,20.6745 28.3324,20.0028 27.5038,20.0028L 26.5037,20.0028 Z " />
+    </Style>
+    <Style x:Key="icon.chevron.down" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 37.8516,39.5833L 52.1016,24.9375L 52.1016,35.2292L 37.8516,50.2708L 23.6016,35.2292L 23.6016,24.9375L 37.8516,39.5833 Z " />
+    </Style>
+    <Style x:Key="icon.chevron.left" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 35.8724,37.6042L 39.0391,40.7708L 50.5182,51.8542L 40.2266,51.8542L 25.1849,37.6041L 40.2266,23.3542L 50.5182,23.3542L 39.0391,34.4375L 35.8724,37.6042 Z " />
+    </Style>
+    <Style x:Key="icon.chevron.right" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 39.8307,37.6042L 36.6641,34.4375L 25.1849,23.3542L 35.4766,23.3542L 50.5182,37.6042L 35.4766,51.8542L 25.1849,51.8542L 36.6641,40.7708L 39.8307,37.6042 Z " />
+    </Style>
+    <Style x:Key="icon.chevron.up" TargetType="{x:Type Path}">
+        <Setter Property="Data" Value="M 37.8516,35.625L 34.6849,38.7917L 23.6016,50.2708L 23.6016,39.9792L 37.8516,24.9375L 52.1016,39.9792L 52.1016,50.2708L 41.0182,38.7917L 37.8516,35.625 Z " />
+    </Style>
+
+
+
+</ResourceDictionary>

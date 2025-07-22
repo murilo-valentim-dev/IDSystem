@@ -1,0 +1,52 @@
+﻿<Window x:Class="IDSystem.Views.UsuarioSistema"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IDSystem.Views"
+        mc:Ignorable="d"
+        Title="UsuarioSistema" Height="450" Width="800">
+    <Grid>
+        <ContentControl Name="ContentTitulo" Content="USUÁRIOS DO SISTEMA" VerticalAlignment ="Top" Margin="4,8,30,0"
+                        Height="35" FontWeight="DemiBold" FontSize="16"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="dataGridUsuario" Grid.Row="1" AutoGenerateColumns="False"
+                              CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" Margin="15,0,5,10">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="Gray"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Padding" Value="10,0,0,0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    </Style>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="#FFE0E0E0"/>
+                    </Style>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="5,2"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="LOGIN" Binding="{Binding Login}" Width="305" />
+                    <DataGridTextColumn Header="DATA DE CRIAÇÃO" Binding="{Binding DataCriacao}" Width="150"/>
+                    <DataGridTextColumn Header="MÁSTER" Binding="{Binding IsMaster}" Width="150" />
+                    <DataGridTextColumn Header="SENHA" Binding="{Binding SenhaHash}" Width="150" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Border CornerRadius="0,0,8,8" Background="LightGray" VerticalAlignment="Bottom">
+            <WrapPanel FlowDirection="RightToLeft" HorizontalAlignment="Right">
+                <Button Name="buttonF8" Click="Command_Click"  Content="FECHAR"
+                    CommandParameter="F8" FlowDirection="LeftToRight" Style="{DynamicResource CommandButton}" ToolTip="Desligar!" Margin="12,8,8,8" />
+            </WrapPanel>
+        </Border>
+    </Grid>
+</Window>
